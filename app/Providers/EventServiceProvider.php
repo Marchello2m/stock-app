@@ -2,13 +2,15 @@
 
 namespace App\Providers;
 
+use App\Events\receiveTestEmail;
+use App\Listeners\testEmailReceived;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        receiveTestEmail::class => [
+            testEmailReceived::class,
         ],
         'App\Events\SendMail' => [
             'App\Listeners\SendMailFired',

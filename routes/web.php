@@ -37,5 +37,7 @@ Route::get('/test-mail',[TestMail::class,'build']);
 
 Route::get('/stocks/search',[StocksController::class,'search']);
 Route::get('/stocks/{symbol}',[StocksController::class,'view']);
+Route::get('/emailTest',[\App\Http\Controllers\emailTestController::class,'index']);
+Route::post('/emailTest',[\App\Http\Controllers\emailTestController::class,'testEmail']);
 
 require __DIR__.'/auth.php';
