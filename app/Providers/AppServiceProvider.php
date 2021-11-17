@@ -16,13 +16,13 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 $this->app->bind(StocksRepository::class, function (){
-
-    $config = Configuration::getDefaultConfiguration()->setApiKey('token', 'YOUR API KEY');
+    $config = Configuration::getDefaultConfiguration()
+        ->setApiKey('token', env('FINNHUB_API_KEY'));
     $client = new DefaultApi(
         new Client(),
         $config
     );
-    return new FinnhubStocksRepository(env('FINNHUB_API_KEY'));
+    return new FinnhubStocksRepository($client);
 });
     }
 

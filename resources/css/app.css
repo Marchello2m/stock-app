@@ -1,3 +1,22 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+.background{
+    outline: none;
+}
+body{
+
+    outline: none;
+    margin: 0px;
+    padding: 0px;
+    background-color:black;
+}
+
+
+header{
+    margin: 0px;
+    padding: 0px;
+    height: 20em;
+    background-color: black;
+}
+

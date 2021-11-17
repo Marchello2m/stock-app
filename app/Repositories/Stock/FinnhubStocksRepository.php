@@ -2,22 +2,23 @@
 
 namespace App\Repositories\Stock;
 
+use App\Models\Company;
+use App\Models\Quote;
+use Finnhub\Api\DefaultApi;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
+
 
 class FinnhubStocksRepository implements StocksRepository
 {
-private string $apiKey;
+    private DefaultApi $apiClient;
 
-private const  API_URL = 'https://finnhub.io/api/v1/';
-
-public function __construct(string $apiKey)
-{
-    $this->apiKey = $apiKey;
-}
+    public function __construct(DefaultApi $apiClient)
+    {
+        $this->apiClient = $apiClient;
+    }
 
 
-    public function getCompanyBySymbol(string $symbol)
+    public function getCompanyBySymbol(string $symbol):Company
     {
         $symbol = strtoupper($symbol);
         $cacheKey = 'companies.view.' . $symbol;
@@ -26,10 +27,28 @@ public function __construct(string $apiKey)
         if (Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
         }
-        $company = Http::get(self::API_URL.'stock/profile2?symbol='. $symbol . '&token=' . $this->apiKey);
+        $responseData =$this->apiClient->companyProfile2($symbol);
+        $company = new Company(
+            $responseData['name'],
+            $symbol,
+            $responseData['logo']
 
-        Cache::put($cacheKey, $company->json(), now()->addMinute());
-var_dump($company);die;
+        );
+
+
+        Cache::put($cacheKey, $company, now()->addMinute());
+
         return $company;
+    }
+
+    public function getQuote(Company $company): Quote
+    {
+       $responseData=$this->apiClient->quote($company->getSymbol());
+
+       return new Quote(
+           $responseData['o'],
+           $responseData['pc'],
+           $responseData['c']
+       );
     }
 }

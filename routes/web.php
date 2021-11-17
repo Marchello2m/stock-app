@@ -32,10 +32,19 @@ Route::middleware('auth:api')->get('/user', function(Request $request) {
     return $request->user();
 });
 
-Route::get('/test-mail',[TestMail::class,'build']);
+
+Route::get('/stocks', [StocksController::class, 'index'])->middleware('auth');
+Route::post('/stocks', [StocksController::class, 'showCompanies'])->middleware('auth');
 
 
-Route::get('/stocks/search',[StocksController::class,'search']);
-Route::get('/stocks/{symbol}',[StocksController::class,'view']);
+Route::get('/stocks/companies', [StocksController::class, 'search'])->middleware('auth');
+
+
+Route::get('/stocks/show',[StocksController::class,'view'])->middleware('auth');  //+
+Route::get('/stocks/{symbol}',[StocksController::class,'view'])->middleware('auth');//+
+
+
+Route::get('/emailTest',[\App\Http\Controllers\emailTestController::class,'index']);
+Route::post('/emailTest',[\App\Http\Controllers\emailTestController::class,'testEmail']);
 
 require __DIR__.'/auth.php';
