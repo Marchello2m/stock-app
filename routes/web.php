@@ -17,14 +17,19 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-
+Route::get('/buystocks', function () {
+    return view('/stocks/buystocks');
+});
+Route::get('/sellStocks', function () {
+    return view('/stocks/sellStocks');
+});
 
 
 Route::middleware('auth:api')->get('/user', function(Request $request) {
@@ -35,6 +40,7 @@ Route::middleware('auth:api')->get('/user', function(Request $request) {
 
 Route::get('/stocks', [StocksController::class, 'index'])->middleware('auth');
 Route::post('/stocks', [StocksController::class, 'showCompanies'])->middleware('auth');
+
 
 
 Route::get('/stocks/companies', [StocksController::class, 'search'])->middleware('auth');

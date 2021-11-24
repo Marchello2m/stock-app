@@ -2,13 +2,13 @@
     <x-slot name="header" class="bg-dark text-white">
         <h2 class="font-semibold text-xl text-white leading-tight thead-dark ">
             Stocks
-            <a href="{{ URL::previous() }}">Go Back</a>
+
         </h2>
     </x-slot>
 
     <div class="py-12 thead-dark ">
 
-        <form action="/stocks" method="post">
+        <form action="/stocks" method="post" style="padding-left: 50px">
             @csrf
 
 
@@ -41,6 +41,7 @@
                         <td>{{ $company->getSymbol() }}</td>
 
 
+
 <td><input type="button" value="See about company" class="btn btn-warning" onclick="window.open('stocks/{{$company->getSymbol()}}')" /></td>
 
                         @endforeach
@@ -49,5 +50,5 @@
             </table>
         @endif
     </div>
-
+    <a style="padding-left: 50px" href="{{ URL::previous() }}">Go Back</a>
 </x-app-layout>

@@ -17,10 +17,10 @@
                     <ul>
                         @csrf
 
-                        <li>Open: {{$quote->getOpen()}}<button   type="submit" class="btn btn-outline-success" onclick="Buy()">BuY</button>  </li>
+                        <li>Open: {{$quote->getOpen()}}<button   type="submit" class="btn btn-outline-success" id="myButton" >  BuY</button>  </li>
 
                         <li>Current: {{$quote->getCurrent()}}</li>
-                        <li>Close: {{$quote->getClose()}} <button class="btn btn-outline-danger" onclick="sellStock()">Sell</button></li>
+                        <li>Close: {{$quote->getClose()}} <button class="btn btn-outline-danger" id="myButton2">Sell</button></li>
 
 
                     </ul>
@@ -34,5 +34,13 @@
 
 </x-app-layout>
 
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "/buystocks";
+    };
+    document.getElementById("myButton2").onclick = function () {
+        location.href = "/sellStocks";
+    };
+</script>
 
 

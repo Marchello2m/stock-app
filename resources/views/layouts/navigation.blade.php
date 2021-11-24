@@ -1,4 +1,5 @@
-<nav x-data="{ open: false }" class="thead-dark ">
+
+<nav x-data="{ open: false }" class="thead-dark "  >
     <!-- Primary Navigation Menu -->
     <div class="  bg-dark ">
         <div class="flex justify-between h-16 ">
@@ -11,24 +12,31 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') ">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white" >
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') " class="text-white">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="/emailTest">
+                    <x-nav-link class="text-white" href="/emailTest">
                         TestEmail
                     </x-nav-link>
 
-                    <x-nav-link href="/stocks">
+                    <x-nav-link class="text-white"  href="/stocks">
                         Stocks
                     </x-nav-link>
-                    <x-nav-link href="/stocks/companies">
+                    <x-nav-link class="text-white" href="/stocks/companies">
                       ALL Stocks Show
                     </x-nav-link>
+                    <x-nav-link class="text-white" href="#">
+                      <div id="txt"></div>
+                    </x-nav-link>
+
+
 
 
                 </div>
             </div>
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -102,3 +110,21 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+        setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+</script>

@@ -90,7 +90,16 @@ class StocksController extends Controller
             'quote' => $quote
 
         ]);
+    }
+    public function buy(int $amount,int $price):Operations
+    {
+        return $this->operations()->create([
+            'type' => Operations::Buy,
+            'quantity' => $amount,
+            'price' => $price,
 
+            redirect('/stocks.show')
+        ]);
     }
 
 }

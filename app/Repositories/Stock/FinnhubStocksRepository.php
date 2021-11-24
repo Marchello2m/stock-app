@@ -31,7 +31,8 @@ class FinnhubStocksRepository implements StocksRepository
         $company = new Company(
             $responseData['name'],
             $symbol,
-            $responseData['logo']
+            $responseData['logo'],
+
 
         );
 

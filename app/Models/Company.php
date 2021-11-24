@@ -9,12 +9,14 @@ class Company
     private string $logoUrl;
 
 
+
     public function __construct(string $name, string $symbol, string $logoUrl)
   {
 
       $this->name = $name;
       $this->symbol=$symbol;
       $this->logoUrl = $logoUrl;
+
 
   }
 
@@ -32,6 +34,8 @@ class Company
     {
         return $this->logoUrl;
     }
+
+
 
 
 }

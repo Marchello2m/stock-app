@@ -16,7 +16,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased bg-dark text-white">
+    <body class="font-sans antialiased bg-dark text-white" onload="startTime()">
         <div class="bg-dark">
             @include('layouts.navigation')
 
